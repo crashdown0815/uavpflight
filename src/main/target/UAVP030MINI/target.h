@@ -20,8 +20,11 @@
 #define USBD_PRODUCT_STRING "UAVP-NG_HW0.30_mini"
 
 
-#define LED0_PIN                PE7
-//#define LED1_PIN                PB4 // Remove this at the next major release
+#define LED0_PIN                PE5
+#define LED1_PIN                PE7
+#define LED2_PIN                PE6
+#define LED3_PIN                PE8
+
 #define BEEPER                  PB0
 #define BEEPER_INVERTED
 
@@ -42,16 +45,23 @@
 
 // MPU6000 interrupts
 #define USE_EXTI
-#define MPU_INT_EXTI            PE0
+#define MPU_INT_EXTI            	PE0
 #define USE_MPU_DATA_READY_SIGNAL
 
 #define MAG
 #define USE_MAG_HMC5883
-#define MAG_HMC5883_ALIGN       CW90_DEG
+#define MAG_HMC5883_ALIGN       	CW90_DEG
+#define MAG_I2C_INSTANCE			I2CDEV_2
+#define HMC5883_I2C_INSTANCE    	I2CDEV_2
+#define MAG_INT_EXTI            	PE12
+#define USE_MAG_DATA_READY_SIGNAL
+
 
 #define BARO
 #define USE_BARO_MS5611
-
+#define USE_BARO_SPI_MS5611
+#define MS5611_CS_PIN		PE1
+#define MS5611_SPI_INSTANCE	SPI1
 
 #if 0 // TODO
 #define ENABLE_BLACKBOX_LOGGING_ON_SDCARD_BY_DEFAULT
@@ -78,7 +88,7 @@
 #define USE_FLASH_M25P16
 #endif
 
-//#define USE_VCP
+#define USE_VCP
 //#define VBUS_SENSING_PIN PC5
 
 #define USE_UART1
@@ -111,23 +121,32 @@
 #define SPI1_MISO_PIN           PA6
 #define SPI1_MOSI_PIN           PA7
 
-#define USE_I2C
-#define USE_I2C_DEVICE_2
-#define I2C2_SCL                PB8
-#define I2C2_SDA                PB9
 
-#define USE_I2C_DEVICE_3
-#define I2C3_SCL                PB10
-#define I2C3_SDA                PB11
+/// I2C Configuration
+#define USE_I2C
+#define USE_I2C_PULLUP
+#define USE_I2C_DEVICE_1
+#define I2C1_SCL                PB8
+#define I2C1_SDA                PB9
+
+#define USE_I2C_DEVICE_2
+#define I2C2_SCL                PB10
+#define I2C2_SDA                PB11
 
 #define I2C_DEVICE              (I2CDEV_2)
 
 #define USE_ADC
 #define VBAT_ADC_PIN            PC1
+#define DEFAULT_VOLTAGE_METER_SOURCE VOLTAGE_METER_ADC
 
 //#define TRANSPONDER
 
 #define DEFAULT_RX_FEATURE      FEATURE_RX_SERIAL
+#define SERIALRX_PROVIDER       SERIALRX_SBUS
+#define SERIALRX_UART           SERIAL_PORT_USART1
+
+#define USE_SERIALRX_SBUS
+#define USE_SERIALRX_SPEKTRUM
 
 #define DEFAULT_FEATURES	0
 #define AVOID_UART1_FOR_PWM_PPM
